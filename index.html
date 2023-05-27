@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crypto Data</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    
+    <h1>Crypto Data</h1>
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search...">
+        <button id="search-button">Search</button>
+    </div>
+    <button id="sort-market-cap-button">Sort by Market Cap</button>
+    <button id="sort-percentage-change-button">Sort by Percentage Change</button>
+    <table id="crypto-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Symbol</th>
+                <th>Price (USD)</th>
+                <th>Volume</th>
+            </tr>
+        </thead>
+        <tbody id="crypto-table-body"></tbody>
+    </table>
+
+    <script src="script.js"></script>
 </body>
 </html>

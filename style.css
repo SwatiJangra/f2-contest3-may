@@ -1,0 +1,53 @@
+h1 {
+    text-align: center;
+}
+
+#header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#search-input {
+    margin-right: 10px;
+}
+
+#crypto-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#crypto-table th,
+#crypto-table td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#crypto-table th {
+    font-weight: bold;
+}
+
+#crypto-table img {
+    height: 20px;
+    width: 20px;
+}
+
+#crypto-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#crypto-table tr:last-child {
+    border-bottom: none;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+button {
+    display: inline-block;
+    margin-right: 10px;
+}
