@@ -1,67 +1,71 @@
-const apiURL =
-  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false";
+let data = [];
 
-// Fetch data using .then method
-fetch(apiURL)
-  .then((response) => response.json())
-  .then((data) => renderTable(data))
-  .catch((error) => console.error("Error:", error));
 
-// Fetch data using async/await method
-async function fetchDataAsync() {
-  try {
-    const response = await fetch(apiURL);
-    const data = await response.json();
-    renderTable(data);
-  } catch (error) {
-    console.error("Error:", error);
-  }
+fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false')
+.then(response => response.json())
+.then(dataResponse => {
+  data = dataResponse;
+  renderTable(data);
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+
+// Fetch data using async/await
+async function fetchData() {
+try {
+  const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false');
+  const data = await response.json();
+  renderTable(data);
+} catch (error) {
+  console.error('Error:', error);
 }
-fetchDataAsync();
+}
+// fetchData(); // Uncomment this line if you want to use async/await
 
-// Render table with data
 function renderTable(data) {
-  const tableBody = document.getElementById("crypto-table-body");
-  tableBody.innerHTML = ""; // Clear previous data
+  const tableBody = document.getElementById('tableBody');
+  tableBody.innerHTML = '';
 
-  data.forEach((crypto) => {
-    const row = document.createElement("tr");
+  data.forEach(item => {
+    const row = document.createElement('tr');
+    const percentageChange = item.price_change_percentage_24h;
+    const percentageChangeClass = percentageChange >= 0 ? 'positive-change' : 'negative-change';
+
     row.innerHTML = `
-        <td><img src="${crypto.image}" alt="${crypto.name}"></td>
-        <td>${crypto.name}</td>
-        <td>${crypto.id}</td>
-        <td>${crypto.symbol}</td>
-        <td>${crypto.current_price}</td>
-        <td>${crypto.total_volume}</td>
+      <td id ="data1"><img src="${item.image}" alt="${item.name}" width="20"></td>
+      <td>${item.name}</td>
+      <td>${item.symbol}</td>
+      <td>${item.id}</td>
+      <td>${"$"+item.current_price}</td>
+      <td class="${percentageChangeClass}">${item.price_change_percentage_24h}%</td>
+      <td>${"Mkt Cap : $"+item.total_volume}</td>
     `;
+
+    row.classList.add('table-row-border');
     tableBody.appendChild(row);
   });
 }
 
-// Search functionality
-const searchButton = document.getElementById("search-button");
-searchButton.addEventListener("click", () => {
-  const searchInput = document.getElementById("search-input").value.toLowerCase();
-  const filteredData = data.filter(
-    (crypto) =>
-      crypto.name.toLowerCase().includes(searchInput) ||
-      crypto.id.toLowerCase().includes(searchInput) ||
-      crypto.symbol.toLowerCase().includes(searchInput)
-  );
+document.getElementById('searchButton').addEventListener('click', () => {
+  const searchInput = document.getElementById('searchInput');
+  const searchTerm = searchInput.value.toLowerCase();
+
+  const filteredData = data.filter(item => {
+    const itemName = item.name.toLowerCase();
+    const itemSymbol = item.symbol.toLowerCase();
+    return itemName.includes(searchTerm) || itemSymbol.includes(searchTerm);
+  });
+
   renderTable(filteredData);
 });
 
-// Sorting functionality
-const sortMarketCapButton = document.getElementById("sort-market-cap-button");
-sortMarketCapButton.addEventListener("click", () => {
-  data.sort((a, b) => a.market_cap - b.market_cap);
+document.getElementById('sortMarketCapButton').addEventListener('click', () => {
+  data.sort((a, b) => b.total_volume - a.total_volume);
   renderTable(data);
-});
+  });
 
-const sortPercentageChangeButton = document.getElementById(
-  "sort-percentage-change-button"
-);
-sortPercentageChangeButton.addEventListener("click", () => {
-  data.sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h);
+document.getElementById('sortPercentageChangeButton').addEventListener('click', () => {
+  data.sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
   renderTable(data);
 });

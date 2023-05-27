@@ -1,53 +1,56 @@
-h1 {
+body{
+    background-color: black;
+    color: white;
     text-align: center;
 }
 
-#header-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
+table {
+  border-collapse: collapse;
 }
 
-#search-input {
-    margin-right: 10px;
+td {
+  border-bottom: 1px solid gray;
 }
 
-#crypto-table {
-    width: 100%;
-    border-collapse: collapse;
+#searchInput{
+  border: 1px solid gray;
+  background-color: black;
+  width: 20%;
+  padding: 15px;
+  margin: 25px 10px;
+  color: white;
+  border-radius: 10px;
 }
 
-#crypto-table th,
-#crypto-table td {
-    padding: 5px;
+button{
+  border: 1px solid gray;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  margin: 25px 5px;
+  border-radius: 10px;
+}
+
+
+
+.positive-change {
+    color: green!important;
+  }
+  
+  .negative-change {
+    color: red!important;
+  }
+
+  td{
+    padding: 20px ;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-}
+    /* border-bottom: 2px solid gray */
+    
+  }
+  #cryptoTable{
+    margin: 0 auto;
+  }
 
-#crypto-table th {
-    font-weight: bold;
-}
-
-#crypto-table img {
-    height: 20px;
-    width: 20px;
-}
-
-#crypto-table tr {
-    border-bottom: 1px solid #ddd;
-}
-
-#crypto-table tr:last-child {
-    border-bottom: none;
-}
-
-body {
-    background-color: black;
-    color: white;
-}
-
-button {
-    display: inline-block;
-    margin-right: 10px;
-}
+  #data1{
+    padding-right: 0;
+  }
